@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <title>제이쿼리 UI개발</title>
+    <style>
+        * {padding: 0; margin: 0;}
+        li {list-style: none;}
+        a {text-decoration: none; color: #000;}
+        html {height: 100%;}
+        body {height: 100%; font-family: 'Noto Sans KR', sans-serif;}
+        button {background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer}
+
+        .menu-btn {position: fixed; top: 29px; right: 29px; z-index: 1; vertical-align: top; width: 32px;}
+        .menu-btn .line {display: block; width: 100%; height: 2px; margin: 0 0 8px 0; background-color: #000; transition: all 0.3s ease-in-out;}
+        .menu-btn .line:last-child {margin: 0 0 0 0;}
+
+        /* 메뉴 X 표시 효과 */
+        .menu-btn.x .line:nth-child(1) {width: 28px; transform: translate(2px, 10px) rotate(-45deg);}
+        .menu-btn.x .line:nth-child(2) {opacity: 0;}
+        .menu-btn.x .line:nth-child(3) {width: 28px; transform: translate(2px, -10px) rotate(45deg);}
+
+        .content {position: fixed; top: 0; right: -500px; width: 500px; height: 100%; padding: 40px; box-sizing: border-box; background-color: #eee;}
+        .content .menu {margin: 120px 0 0 0;}
+        .content .menu-list {padding: 8px 0;}
+        .content .link {font-size: 32px; font-weight: 700;}
+        .content .link:hover {color: rgb(51, 21, 221);}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <button class="menu-btn">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+        <div class="content">
+            <ul class="menu">
+                <li class="menu-list">
+                    <a href="#" class="link">프로젝트</a>
+                </li>
+                <li class="menu-list">
+                    <a href="#" class="link">소개</a>
+                </li>
+                <li class="menu-list">
+                    <a href="#" class="link">경험</a>
+                </li>
+                <li class="menu-list">
+                    <a href="#" class="link">연락처</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <p style="font-size: 100px;">스크롤 내려도 ↓</p>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <p style="font-size: 100px;">메뉴가 고정됩니다.</p>
+    </div>
+    <script>
+        var $link = $('.menu-btn'), // 메뉴 버튼
+            $menu = $('.content'), // 콘텐츠
+            $duration = 500; // 속도
+
+        // 햄버거 메뉴 콘텐츠
+        $link.click(function () { // 클릭하면 { } 안에 있는 것들 실행
+            $menu.toggleClass('on'); // 클릭하면 on 클래스 넣기
+            if ($menu.hasClass('on')) { // 클릭하면 on 참이면 { } 안에 있는 것들 실행
+                $menu.stop().animate({right: '-0px'},$duration); // 열기 (메뉴 클릭 후)
+            } else {
+                $menu.stop().animate({right: '-500px'},$duration); // 닫기 (메뉴 클릭 전)
+            }
+        });
+
+        // 햄버거 메뉴 "X" 표시
+        $link.click(function () { // 클릭하면 { } 안에 있는 것들 실행
+            $link.toggleClass("x"); // 클릭하면 x 클래스 넣기
+        });
+    </script>
+</body>
+</html>
