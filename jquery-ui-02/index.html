@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="./modernizr-custom.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <title>제이쿼리 UI개발</title>
+    <style>
+        * {padding: 0; margin: 0;}
+        li {list-style: none;}
+        a {text-decoration: none; color: #000;}
+        img {vertical-align: top;}
+
+        .slideshow {overflow: hidden; position: relative; min-width: 960px; height: 465px;}
+        .slideshow img {display: none; position: absolute; left: 50%; transform: translateX(-50%);}
+
+        /* 자바스크립트 */
+        .no-js .slideshow img:first-child {display: inline;}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="inner">
+            <div class="slideshow">
+                <img src="./img01.jpg" alt="">
+                <img src="./img02.jpg" alt="">
+                <img src="./img03.jpg" alt="">
+                <img src="./img04.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <div>
+        <p style="font-size: 28px; text-align: center;">자동으로 슬라이드 이미지가 교체되는 슬라이드 쇼</p>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <script>
+        var slides = $('.slideshow img'),
+            slidesCount = slides.length,
+            currentIndex = 0,
+            speed = 2000;
+
+            // 해당시간이 지나면 한번만 할일: var timer = setTimeout(할일, 1000);
+            // clearTimeout(timer);
+
+            // 일정시간 마다 할일: var timer = setInterval(할일, 시간);
+            // clearInterval(timer);
+
+            // jquery 집합개체(object)중 특정번째 요소를 선택: .eq(숫자);
+            // 요소를 서서히 나타나도록 하는 명령어: .fadeIn();
+            // 요소를 서서히 사라지도록 하는 명령어: .fadeOut();
+            // clearInterval(이름)
+
+            slides.eq(currentIndex).fadeIn();
+            var timer = undefined;  // 타이머의 값을 undefined(지정되어 있지 않다)라고 지정합니다.
+
+            if (timer == undefined) { // 타이머의 값이 undefined이면 showNextslide를 3.5s 마다 실행하라고 합니다.
+                timer = setInterval(showNextSlide, speed);
+            }
+
+            function showNextSlide() {
+                var nextIndex = (currentIndex + 1) % slidesCount;
+                slides.eq(currentIndex).fadeOut();
+                slides.eq(nextIndex).fadeIn();
+                currentIndex = nextIndex;
+                console.log(currentIndex);
+            }
+            
+            function timeron() {
+                if (!timer) { // 타이머의 값이 undefined이면 showNextslide를 3.5s 마다 실행하라고 합니다.
+                    timer = setInterval(showNextSlide, speed);
+                }
+            }
+
+            function timeroff() {
+                if (timer) { // 타이머의 값이 있으면 즉 setInterval(showNextSlide, 1000)값이 있으면 클리어하고 값을 다시 undefined로 저장합니다.
+                    clearInterval(timer);
+                    timer = undefined;
+                }
+            }
+
+            slides.mouseenter(function () {
+                timeroff();
+            })
+            .mouseleave(function () {
+                timeron();
+            })
+    </script>
+</body>
+</html>
