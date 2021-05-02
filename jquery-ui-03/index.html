@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../reset.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <title>제이쿼리 UI개발</title>
+    <style>
+        .header {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 50px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .header > div {
+            height: 50px;
+            box-sizing: border-box;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header .gnb-box {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        .header .gnb {
+            width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header .gnb:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .header .gnb-list {
+            float: left;
+            padding: 0 10px;
+            margin: 0 10px;
+            line-height: 50px;
+        }
+
+        .header .sub {
+            width: 100%;
+        }
+
+        .main {
+            padding: 50px 0 0 0;
+        }
+
+        .main .content .slider-box {
+            position: relative;
+        }
+
+        .main .content .slider-desc {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1180px;
+            text-align: center;
+            font-size: 60px;
+            background-color: #fff;
+            color: #000;
+        }
+        
+        .main .content .slider-img {
+            width: 100%;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <nav class="gnb-box">
+                <ul class="gnb">
+                    <li class="gnb-list">
+                        <a href="a#">헤더 메뉴</a>
+                        <ul class="sub">
+                            <li><a href="a#">서브페이지 링크</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb-list">
+                        <a href="a#">헤더 메뉴</a>
+                        <ul class="sub">
+                            <li><a href="a#">서브페이지 링크</a></li>
+                            <li><a href="a#">서브페이지 링크</a></li>
+                            <li><a href="a#">서브페이지 링크</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb-list">
+                        <a href="a#">헤더 메뉴</a>
+                        <ul class="sub">
+                            <li><a href="a#">서브페이지 링크</a></li>
+                            <li><a href="a#">서브페이지 링크</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="main">
+        <section class="content">
+            <h2 class="hide">본문내용</h2>
+            <section class="slider">
+                <h3 class="hide">슬라이더</h3>
+                <div class="slider-box">
+                    <img src="../jquery-ui-03/slider-img01.jpg" class="slider-img" alt="슬라이더 이미지 01">
+                    <p class="slider-desc">GNB 글자 수가 서로 같고 LNB도 같으면 사용하는 제이쿼리 오픈 소스</p>
+                </div>
+            </section>
+        </section>
+    </main>
+    <script>
+        var $firstMenu = $('nav'); // 마우스 오버 
+        var $header = $('header');
+
+        $firstMenu.mouseenter(function () {
+            $header.stop().animate({ height: '200px'}); // 마우스 오버 하면 헤더 높이 200px 
+        })
+        .mouseleave(function () {
+            $header.stop().animate({ height: '50px'}); // 마우스 아웃 하면 헤더 높이 50px 
+        });
+    </script>
+</body>
+</html>
