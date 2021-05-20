@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 제이쿼리 CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- 제이쿼리 UI CDN -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- gsap CDN 애니메이션 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+
+    <!-- 플러그인 -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollTrigger/1.0.5/ScrollTrigger.min.js"></script>
+    <title>제이쿼리 UI개발</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: rgba(0, 0, 0, 0.85);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin-top: 2rem;
+        }
+
+        .headroom {
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            padding: 0 2rem;
+            overflow: hidden;
+            width: 100%;
+            background-color: #252526;
+            transition: transform .3s linear;
+        }
+
+        .headroom h1 {
+            color: #fff;
+            float: left;
+            line-height: 4rem;
+        }
+
+        main .img-motion {
+            overflow: hidden;
+        }
+
+        nav {
+            float: right;
+        }
+
+        nav ul li {
+            float: left;
+            list-style: none;
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            display: inline-block;
+            line-height: 4rem;
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            color: white;
+        }
+
+        main {
+            width: 75%;
+            margin: 3rem auto 0;
+            padding-top: 4rem;
+        }
+
+        article {
+            margin-bottom: 3rem;
+        }
+
+        article h1 {
+            margin: 1.5rem 0;
+        }
+
+
+        .gsap-motion-box {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        [gsap-ScrollTrigger] {
+            opacity: 0;
+            position: relative;
+            top: 20px;
+            transition: 0.5s ease-out;
+        }
+
+        [gsap-ScrollTrigger].on {
+            opacity: 1;
+            top: 0;
+            transform: scale(1.5);
+            transition: all ease 2s 0s;
+        }
+
+        [gsap-ScrollTrigger].off {
+            opacity: 1;
+            top: 0;
+            transform: scale(1)
+        }
+    </style>
+</head>
+<body>
+    <header class="headroom">
+        <h1>Tech news</h1>
+        <nav class="gnb-nav">
+            <ul class="gnb-list">
+                <li class="gnb-item"><a href="#">Home</a></li>
+                <li class="gnb-item"><a href="#">Blog</a></li>
+                <li class="gnb-item"><a href="#">Contact</a></li>
+                <li id="buy-link"><a href="#">Buy now</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h1 main-gsap-ScrollTrigger class="title-motion-h1">제목</h1>
+            <p class="txt-motion-h1">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <div class="img-motion">
+                <img src="../img-content.jpg" alt="테스트 이미지">
+            </div>
+        </article>
+
+        <div class="gsap-motion-box">
+            <article>
+                <h1>제목</h1>
+                <div class="img-motion">
+                    <img src="../img-content.jpg" gsap-ScrollTrigger alt="테스트 이미지">
+                </div>
+            </article>
+        </div>
+
+        <div class="gsap-motion-box">
+            <article>
+                <h1>제목</h1>
+                <div class="img-motion">
+                    <img src="../img-content.jpg" gsap-ScrollTrigger alt="테스트 이미지">
+                </div>
+            </article>
+        </div>
+    </main>
+    <script>
+        const trigger = new ScrollTrigger.default({
+            trigger: {
+                // once: true, // 한번 나타나는 애니메이션
+                once: false, // 여러번 나타나는 애니메이션
+                offset: {
+                    element: {
+                        x: 0,
+                        y: (trigger, rect, direction) => {
+                            return 0.1
+                        }
+                    },
+                    viewport: {
+                        x: 0,
+                        y: (trigger, frame, direction) => {
+                            return trigger.visible ? 0 : 0.1
+                        }
+                    }
+                },
+                toggle: {
+                    class: {
+                        in: 'on',
+                        out: 'off',
+                    }
+                }
+            }
+        });
+        trigger.add('[gsap-ScrollTrigger]');
+        trigger.add('[main-gsap-ScrollTrigger]');
+    </script>
+</body>
+</html>
