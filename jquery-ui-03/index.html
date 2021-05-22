@@ -132,12 +132,12 @@
     </main>
     <script>
         var $firstMenu = $('nav'); // 마우스 오버 
-        var $header = $('header');
+        var $header = $('header'); // 헤더의 높이
 
-        $firstMenu.mouseenter(function () {
+        $firstMenu.mouseenter(function () { // 마우스 오버 하면
             $header.stop().animate({ height: '200px'}); // 마우스 오버 하면 헤더 높이 200px 
         })
-        .mouseleave(function () {
+        .mouseleave(function () { // 마우스 아웃 하면
             $header.stop().animate({ height: '50px'}); // 마우스 아웃 하면 헤더 높이 50px 
         });
     </script>
