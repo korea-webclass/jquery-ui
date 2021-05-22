@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <title>제이쿼리 UI개발</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        body {
+            padding-top: 50px;
+            background: grey;
+            overflow-y: scroll;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            /* background: linear-gradient(white 50px, rgba(255, 255, 255, 0.5) 50px, rgba(255, 255, 255, 0.5)); */
+            background-color: white;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        nav {
+            width: 960px;
+            margin: 0 auto;
+        }
+
+        nav > ul > li {
+            float: left;
+            line-height: 50px;
+            margin-right: 40px;
+            position: relative;
+        }
+
+        nav > ul > li ul {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            white-space: nowrap;
+        }
+
+        /* nav > ul > li:hover ul {
+            display: block;
+        } */
+
+        nav > ul > li ul li {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="clearfix">
+                <li>
+                    <a href="#">나의 소개</a>
+                    <ul>
+                        <li>웹클래스란?</li>
+                        <li>다함께 코딩</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">포트폴리오</a>
+                    <ul>
+                        <li>PC</li>
+                        <li>mobile</li>
+                        <li>responsive</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">스킬</a>
+                    <ul>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <p style="font-size: 124px; text-align: center;">콘텐츠</p>
+    </main>
+    <script>
+        // a.height() 알맹이
+        // a.innerHeight() 패딩
+        // a.outerHeight() 보더
+        // a.outerHeight(true) 패딩
+
+        var $firstMenu = $('nav > ul > li'),
+            $header = $('header'),
+            $headerHeight = $header.outerHeight();
+
+        $firstMenu.mouseenter(function(){
+            var subHeight = $(this).find('ul').outerHeight()
+            $header.stop().animate({height: $headerHeight + subHeight + 'px'},200);
+            // setTimout(할일, 시간); 할일 function(){}
+            $(this).find('ul').show();
+        })
+        .mouseleave(function(){
+            $header.stop().animate({height: $headerHeight + 'px'},200);
+            $(this).find('ul').hide();
+        });
+    </script>
+</body>
+</html>
